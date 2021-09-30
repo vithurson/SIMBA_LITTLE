@@ -59,9 +59,9 @@ class AXI_Unit extends Module {
   /// tight interface
   val o_data  = RegInit(UInt(32.W),0.U)
   val done_i = RegInit(Bool(),1.B)
-  val idle :: read :: write :: Nil = Enum(4)
-  val aw_st :: w_st :: b_res :: Nil= Enum(4)
-  val ar_st :: r_st :: Nil  = Enum(3)
+  val idle :: read :: write :: Nil = Enum(3)
+  val aw_st :: w_st :: b_res :: Nil= Enum(3)
+  val ar_st :: r_st :: Nil  = Enum(2)
   val state = RegInit(UInt(2.W),0.U)
   val wstate = RegInit(UInt(2.W),0.U)
   val rstate = RegInit(UInt(1.W),0.B)
@@ -141,8 +141,11 @@ class AXI_Unit extends Module {
   io.axi_wvalid := wvalid
   io.axi_awvalid := awvalid
 
+  io.axi_bready  := bready
+  io.axi_bready  := bready
+
   io.axi_araddr := araddr
-  io.axi_araddr := araddr
+  io.axi_arvalid := arvalid
   io.axi_rready := rready 
   io.axi_wstrb  := wstrb
 }
